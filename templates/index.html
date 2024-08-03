@@ -2,46 +2,110 @@
 <html>
 
 <head>
-    <title>
-        Email Spam Classifier
-    </title>
-
+    <title>Email Spam Classifier</title>
     <style>
         body {
-            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #BB86FC;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 600px;
+            background-color: #1F1F1F;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #BB86FC;
+            border-radius: 4px;
+            background-color: #2C2C2C;
+            color: #E0E0E0;
+            resize: none;
         }
 
         button {
-            color: aliceblue;
-            background-color: blue;
+            color: #121212;
+            background-color: #BB86FC;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background-color: #BB86FC;
+            opacity: 0.9;
+        }
+
+        a {
+            color: #BB86FC;
+            text-decoration: none;
+            margin: 10px 5px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            textarea {
+                height: 200px;
+            }
+
+            button, a {
+                width: 100%;
+                text-align: center;
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
 
 <body>
     <h1>Email Spam Classifier</h1>
-    <div>
-        <form method="post" action="/predict">
-            <textarea rows="12" cols="60" name="content" placeholder="Enter your email here"
-                autocomplete="off">{{ email }}</textarea>
-            <div>
-                <button type="submit">
-                    Submit
-                </button>
-                <a href="/">Reset</a>
-            </div>
-        </form>
+    <form method="post" action="/predict">
+        <textarea rows="12" cols="60" name="content" placeholder="Enter your email here" autocomplete="off">{{ email }}</textarea>
+        <div>
+            <button type="submit">Submit</button>
+            <a href="/">Reset</a>
+        </div>
+    </form>
 
-    </div>
-    <div>
+    <div class="result">
         {% if prediction %}
         {% if prediction == 1 %}
-        <h2 style="color: red">Spam</h2>
+        <h2 style="color: #CF6679">Spam</h2>
         {% else %}
-        <h2 style="color: green">Not Spam</h2>
+        <h2 style="color: #03DAC6">Not Spam</h2>
         {% endif %}
         {% endif %}
-        <!-- <p id="display"></p> -->
     </div>
 </body>
+
 </html>
